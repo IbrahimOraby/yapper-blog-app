@@ -5,7 +5,7 @@ function Header() {
 	return (
 		<header className="navbar bg-base-100 --color shadow-sm">
 			<div className="flex-1">
-				<Link className="btn btn-ghost text-xl" to={""}>
+				<Link className="btn btn-ghost text-neutral text-xl font-bold" to={""}>
 					Yapper
 				</Link>
 			</div>
@@ -18,6 +18,12 @@ function Header() {
 					</li>
 					<li>
 						<Link to={""}>Home</Link>
+					</li>
+					<li>
+						<Link to={"login"}>Sign in</Link>
+					</li>
+					<li>
+						<Link to={"signup"}>Sign up</Link>
 					</li>
 				</ul>
 			</nav>

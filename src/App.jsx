@@ -7,7 +7,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			<main className="flex-1">
+			<main className="flex justify-center items-center py-2 px-8 flex-1">
 				<Outlet />
 			</main>
 			<Footer />
