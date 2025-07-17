@@ -33,7 +33,7 @@ function Signup() {
 			<div>
 				<h1 className="text-4xl font-bold text-neutral">Sign Up</h1>
 				<p className="py-4 text-sm">
-					Welcome to your corner of the internet. You'll never be bored again.
+					Welcome to your corner of the internet. Let the yapping begin.
 				</p>
 			</div>
 
@@ -70,9 +70,9 @@ function Signup() {
 				/>
 			</div>
 
-            <div className="h-1">
-			{error && <p className="text-error text-sm my-2">{error}</p>}
-            </div>
+			<div className="h-1">
+				{error && <p className="text-error text-sm my-2">{error}</p>}
+			</div>
 			<button
 				className="btn btn-neutral mt-4 w-full"
 				type="submit"
