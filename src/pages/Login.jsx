@@ -3,9 +3,11 @@ import * as Yup from "yup";
 import { signInUser } from "../services/auth_service";
 import { useNavigate } from "react-router";
 import MyTextInput from "../components/TextInput";
+import FormHeader from "../components/FormHeader";
 
 function Login() {
 	const navigate = useNavigate();
+	
 	return (
 		<Formik
 			initialValues={{
@@ -36,12 +38,8 @@ function Login() {
 		>
 			{({ isSubmitting, status }) => (
 				<Form className=" bg-base-200 border-base-300 rounded-box w-md border p-8">
-					<div>
-						<h1 className="text-4xl font-bold text-neutral">Sign In</h1>
-						<p className="py-4 text-sm">
-							Welcome to your corner of the internet. Let the yapping begin.
-						</p>
-					</div>
+					<FormHeader>Sign In</FormHeader>
+
 					<div className="flex flex-col">
 						<MyTextInput
 							label="Email Address"
@@ -50,6 +48,7 @@ function Login() {
 							placeholder="jane@formik.com"
 						/>
 					</div>
+
 					<div className="flex flex-col">
 						<MyTextInput label="Password" name="password" type="password" />
 					</div>
