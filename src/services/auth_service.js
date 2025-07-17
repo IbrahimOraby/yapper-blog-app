@@ -4,36 +4,7 @@ import {
 	signOut,
 	updateProfile
 } from "firebase/auth";
-// import { GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-
-// const provider = new GoogleAuthProvider();
-
-// // google register
-// export const signInWithGoogle = async () => {
-// 	try {
-// 		const result = await signInWithPopup(auth, provider);
-// 		const credential = GoogleAuthProvider.credentialFromResult(result);
-// 		const token = credential.accessToken;
-// 		const user = result.user;
-// 		const additionalInfo = getAdditionalUserInfo(result);
-
-// 		return {
-// 			user,
-// 			token,
-// 			isNewUser: additionalInfo?.isNewUser,
-// 			providerId: additionalInfo?.providerId
-// 		};
-// 	} catch (error) {
-// 		throw {
-// 			code: error.code,
-// 			message: error.message,
-// 			email: error.customData?.email,
-// 			credential: GoogleAuthProvider.credentialFromError(error),
-// 			raw: error
-// 		};
-// 	}
-// };
 
 // sign up
 export const signUpUser = async (username, email, password) => {

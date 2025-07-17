@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import MyTextInput from "../components/TextInput";
 import FormHeader from "../components/FormHeader";
 import { useNavigate } from "react-router";
+import { createUser } from "../services/firestore-service";
 
 function Signup() {
 	const navigate = useNavigate();
@@ -37,12 +38,23 @@ function Signup() {
 				console.log("actions: ", actions);
 
 				try {
+					const userName = `${values.firstName} ${values.lastName}`;
+					//signup
 					const userCred = await signUpUser(
-						`${values.firstName} ${values.lastName}`,
+						userName,
 						values.email,
 						values.password
 					);
-					console.log(userCred);
+					const uid = userCred.user.uid;
+
+					//create user in firestore
+					await createUser({
+						uid,
+						email: values.email,
+						displayName: userName 
+					});
+
+					//navigate to Home Page
 					navigate("/", { replace: true });
 				} catch (err) {
 					console.error(err);
