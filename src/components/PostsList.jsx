@@ -1,9 +1,21 @@
 import React from "react";
 import DeleteButton from "./Buttons/DeleteButton";
 import EditButton from "./Buttons/EditButton";
+import { deletePost } from "../services/firestore-service";
+import useAuthStore from "../store/useAuthStore";
 
-function PostsList({ posts }) {
+function PostsList({ posts, fetchAllPosts }) {
 	console.log(posts);
+	const currentUser = useAuthStore((s) => s.currentUser);
+
+	if (currentUser) console.log(currentUser);
+
+	const handleDelete = async (pid) => {
+		console.log(pid);
+		await deletePost(pid);
+		await fetchAllPosts();
+	};
+
 	return (
 		<>
 			<div className="flex flex-col gap-8 px-4 max-w-xl mx-auto">
@@ -52,9 +64,16 @@ function PostsList({ posts }) {
 								</div>
 							)}
 						</div>
-						<div className="my-2 flex justify-end gap-1 min-h-4">
-							<EditButton />
-							<DeleteButton className="" />
+						<div className="my-2 flex justify-end gap-1 min-h-10">
+							{currentUser.uid === post.uid && (
+								<>
+									<EditButton />
+									<DeleteButton
+										handleDelete={() => handleDelete(post.id)}
+										className=""
+									/>
+								</>
+							)}
 						</div>
 					</div>
 				))}

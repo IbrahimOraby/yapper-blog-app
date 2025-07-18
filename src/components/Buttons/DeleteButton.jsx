@@ -1,8 +1,8 @@
 import React from "react";
 
-function DeleteButton() {
+function DeleteButton({ handleDelete }) {
 	return (
-		<button className="btn btn-circle btn-ghost">
+		<button onClick={handleDelete} className="btn btn-circle btn-ghost">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"

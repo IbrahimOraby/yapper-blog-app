@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
-import { auth } from "../../firebaseConfig";
 import * as Yup from "yup";
-import { createPost } from "../services/firestore-service";import { Form, Formik } from "formik";
+import { createPost } from "../services/firestore-service";
+import { Form, Formik } from "formik";
 import MyTextInput from "../components/TextInput";
 import MyTextAreaInput from "../components/TextAreaInput";
 import MyFileInput from "../components/FileInput";
+import useAuthStore from "../store/useAuthStore";
 
+function PostModal({ fetchAllPosts }) {
+	const currentUser = useAuthStore((s) => s.currentUser);
 
-function PostModal({fetchAllPosts}) {
-	const currUser = auth.currentUser;
 	const fileInputRef = useRef(null);
 
 	const SUPPORTED_FORMATS = [
@@ -73,7 +74,7 @@ function PostModal({fetchAllPosts}) {
 									postBody: values.postBody,
 									postFile: cdnUrl
 								};
-								await createPost(currUser, postData);
+								await createPost(currentUser, postData);
 								await fetchAllPosts();
 
 								// reset and close

@@ -66,7 +66,8 @@ export const getAllPosts = async () => {
 export const deletePost = async (pid) => {
 	try {
 		await deleteDoc(doc(db, "posts", pid));
+		console.log(`Post with ${pid} is deleted `);
 	} catch (error) {
-		console.error("Error: ", error);
+		console.error("Error deleting the post: ", error);
 	}
 };
