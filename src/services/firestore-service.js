@@ -1,10 +1,12 @@
 import {
 	addDoc,
 	collection,
+	deleteDoc,
 	doc,
 	getDocs,
 	getFirestore,
 	orderBy,
+	query,
 	serverTimestamp,
 	setDoc
 } from "firebase/firestore";
@@ -44,10 +46,13 @@ export const createPost = async (userData, postData) => {
 
 export const getAllPosts = async () => {
 	try {
-		const querySnapshot = await getDocs(
+		const postsQuery = query(
 			collection(db, "posts"),
 			orderBy("createdAt", "desc")
 		);
+
+		const querySnapshot = await getDocs(postsQuery);
+
 		const postsList = querySnapshot.docs.map((doc) => ({
 			id: doc.id,
 			...doc.data()
@@ -56,9 +61,12 @@ export const getAllPosts = async () => {
 	} catch (error) {
 		console.error("Error fetching posts: ", error);
 	}
+};
 
-	// querySnapshot.forEach((doc) => {
-	// 	// doc.data() is never undefined for query doc snapshots
-	// 	console.log(doc.id, " => ", doc.data());
-	// });
+export const deletePost = async (pid) => {
+	try {
+		await deleteDoc(doc(db, "posts", pid));
+	} catch (error) {
+		console.error("Error: ", error);
+	}
 };
