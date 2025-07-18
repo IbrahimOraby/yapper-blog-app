@@ -18,7 +18,7 @@ function Home() {
 
 	return (
 		<>
-			{posts.length > 0 ? <PostsList posts={posts} /> : "No Posts"}
+			{posts.length > 0 ? <PostsList fetchAllPosts={fetchAllPosts} posts={posts} /> : "No Posts"}
 			<AddButton />
 			<PostModal fetchAllPosts={fetchAllPosts} />
 		</>
