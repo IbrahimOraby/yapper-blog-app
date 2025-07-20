@@ -5,6 +5,7 @@ import PostModal from "../components/PostModal";
 import usePostStore from "../store/usePostStore";
 import PostSkeleton from "../components/PostSkeleton";
 import useAuthStore from "../store/useAuthStore";
+import { Link } from "react-router";
 
 function Home() {
 	const { posts, loading, fetchAllPosts } = usePostStore();
@@ -21,12 +22,12 @@ function Home() {
 					<div className="bg-warning text-warning-content px-6 py-3 text-sm rounded-box">
 						Welcome to <strong>Yapper</strong> — feel free to browse all posts!
 						But if you wanna <strong>yap</strong> yourself, you'll need to{" "}
-						<a
+						<Link
 							href="/login"
 							className="underline hover:text-warning-content/80 font-semibold"
 						>
 							sign in
-						</a>
+						</Link>
 						.
 					</div>
 				)}

@@ -43,7 +43,6 @@ function Login() {
 								label="Email Address"
 								name="email"
 								type="email"
-								placeholder="jane@formik.com"
 							/>
 						</div>
 
