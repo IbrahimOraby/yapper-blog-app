@@ -15,7 +15,7 @@ function Login() {
 				password: ""
 			}}
 			validationSchema={Yup.object({
-				email: Yup.string().email("Invalid email address").required("Required"),
+				email: Yup.string().email("Invalid email address").required("Email is Required"),
 				password: Yup.string()
 					.required("Password is required")
 					.min(6, "Password must be at least 6 characters")
@@ -35,7 +35,7 @@ function Login() {
 		>
 			{({ isSubmitting, status }) => (
 				<div className="flex items-center">
-					<Form className=" bg-base-200 border-base-300 rounded-box w-md border p-8">
+					<Form className=" bg-base-200 border-base-300 rounded-box w-xs md:w-md border p-8">
 						<FormHeader>Sign In</FormHeader>
 
 						<div className="flex flex-col">

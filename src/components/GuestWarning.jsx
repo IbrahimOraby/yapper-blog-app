@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 function GuestWarning() {
 	return (
-		<div className="bg-warning text-warning-content px-6 py-3 text-sm rounded-box">
+		<div className="bg-warning text-warning-content px-6 py-3 text-sm rounded-box w-xs md:w-full">
 			Welcome to <strong>Yapper</strong> — feel free to browse all posts! But if
 			you wanna <strong>yap</strong> yourself, you'll need to{" "}
 			<Link

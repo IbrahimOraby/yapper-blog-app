@@ -45,7 +45,7 @@ function PostModal({ fetchAllPosts }) {
 							.required("Title is required")
 							.min(3, "Title must be at least 3 characters")
 							.max(100, "Title must be less than 100 characters"),
-						postBody: Yup.string().required("Content is required"),
+						postBody: Yup.string().required("Body is required"),
 						postFile: Yup.mixed()
 							.test("fileRequired", "An image is required", (value) => {
 								// Allow string (existing image URL) OR File object
@@ -137,7 +137,7 @@ function PostModal({ fetchAllPosts }) {
 								placeholder="Enter Your Post Title"
 							></MyTextInput>
 
-							{/* Post Content */}
+							{/* Post Body */}
 							<MyTextAreaInput
 								label="Body"
 								name="postBody"
