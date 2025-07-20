@@ -23,7 +23,7 @@ function Home() {
 						Welcome to <strong>Yapper</strong> — feel free to browse all posts!
 						But if you wanna <strong>yap</strong> yourself, you'll need to{" "}
 						<Link
-							href="/login"
+							to="/login"
 							className="underline hover:text-warning-content/80 font-semibold"
 						>
 							sign in
