@@ -10,6 +10,7 @@ import { Link } from "react-router";
 function Home() {
 	const { posts, loading, fetchAllPosts } = usePostStore();
 	const currentUser = useAuthStore((s) => s.currentUser);
+	const userLoading = useAuthStore((s) => s.loading);
 
 	useEffect(() => {
 		fetchAllPosts();
@@ -18,7 +19,7 @@ function Home() {
 	return (
 		<>
 			<div className="flex flex-col gap-8 px-4 max-w-xl ">
-				{!currentUser?.uid && (
+				{!userLoading && !currentUser?.uid && (
 					<div className="bg-warning text-warning-content px-6 py-3 text-sm rounded-box">
 						Welcome to <strong>Yapper</strong> — feel free to browse all posts!
 						But if you wanna <strong>yap</strong> yourself, you'll need to{" "}
@@ -39,7 +40,7 @@ function Home() {
 						.map((el, i) => <PostSkeleton key={i} />)
 				)}
 
-				{currentUser?.uid && <AddButton />}
+				{ !userLoading && currentUser?.uid && <AddButton />}
 				<PostModal fetchAllPosts={fetchAllPosts} />
 			</div>
 		</>
