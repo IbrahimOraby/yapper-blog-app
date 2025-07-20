@@ -7,7 +7,7 @@ import FormHeader from "../components/FormHeader";
 
 function Login() {
 	const navigate = useNavigate();
-	
+
 	return (
 		<Formik
 			initialValues={{
@@ -21,9 +21,6 @@ function Login() {
 					.min(6, "Password must be at least 6 characters")
 			})}
 			onSubmit={async (values, actions) => {
-				console.log("values: ", values);
-				console.log("actions: ", actions);
-
 				try {
 					const userCred = await signInUser(values.email, values.password);
 					console.log(userCred);
@@ -37,31 +34,37 @@ function Login() {
 			}}
 		>
 			{({ isSubmitting, status }) => (
-				<Form className=" bg-base-200 border-base-300 rounded-box w-md border p-8">
-					<FormHeader>Sign In</FormHeader>
+				<div className="flex items-center">
+					<Form className=" bg-base-200 border-base-300 rounded-box w-md border p-8">
+						<FormHeader>Sign In</FormHeader>
 
-					<div className="flex flex-col">
-						<MyTextInput
-							label="Email Address"
-							name="email"
-							type="email"
-							placeholder="jane@formik.com"
-						/>
-					</div>
+						<div className="flex flex-col">
+							<MyTextInput
+								label="Email Address"
+								name="email"
+								type="email"
+								placeholder="jane@formik.com"
+							/>
+						</div>
 
-					<div className="flex flex-col">
-						<MyTextInput label="Password" name="password" type="password" />
-					</div>
+						<div className="flex flex-col">
+							<MyTextInput label="Password" name="password" type="password" />
+						</div>
 
-					<button type="submit" className="btn btn-neutral mt-4 w-full mb-0.5">
-						{isSubmitting ? "Logging in..." : "Login"}
-					</button>
-					{
-						<div className="text-xs text-red-500 min-h-0.5 mb-1">
+						<button
+							type="submit"
+							className={`btn btn-neutral mt-4 w-full mb-0.5 ${
+								isSubmitting && "btn-disabled"
+							}`}
+						>
+							{isSubmitting ? "Logging in..." : "Login"}
+						</button>
+
+						<div className="text-xs text-error min-h-0.5 ">
 							{status ? status : "\u00A0"}
 						</div>
-					}
-				</Form>
+					</Form>
+				</div>
 			)}
 		</Formik>
 	);

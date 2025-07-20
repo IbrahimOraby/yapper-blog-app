@@ -1,8 +1,8 @@
 import React from "react";
 
-function EditButton() {
+function EditButton({ handleEdit }) {
 	return (
-		<button className="btn btn-circle btn-ghost">
+		<button className="btn btn-circle btn-ghost" onClick={handleEdit}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"

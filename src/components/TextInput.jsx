@@ -12,7 +12,7 @@ const MyTextInput = ({ label, ...props }) => {
 				{...field}
 				{...props}
 			/>
-			<div className="text-xs text-error min-h-0.5 mb-2">
+			<div className="text-xs text-error min-h-0.5">
 				{meta?.touched && meta?.error ? meta.error : "\u00A0"}
 			</div>
 		</>

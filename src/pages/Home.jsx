@@ -1,26 +1,46 @@
-import { getAllPosts } from "../services/firestore-service";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PostsList from "../components/PostsList";
 import AddButton from "../components/Buttons/AddButton";
 import PostModal from "../components/PostModal";
+import usePostStore from "../store/usePostStore";
+import PostSkeleton from "../components/PostSkeleton";
+import useAuthStore from "../store/useAuthStore";
 
 function Home() {
-	const [posts, setPosts] = useState([]);
-
-	const fetchAllPosts = async () => {
-		const posts = await getAllPosts();
-		setPosts(posts);
-	};
+	const { posts, loading, fetchAllPosts } = usePostStore();
+	const currentUser = useAuthStore((s) => s.currentUser);
 
 	useEffect(() => {
 		fetchAllPosts();
-	}, []); //posts
+	}, []);
 
 	return (
 		<>
-			{posts.length > 0 ? <PostsList fetchAllPosts={fetchAllPosts} posts={posts} /> : "No Posts"}
-			<AddButton />
-			<PostModal fetchAllPosts={fetchAllPosts} />
+			<div className="flex flex-col gap-8 px-4 max-w-xl ">
+				{!currentUser?.uid && (
+					<div className="bg-warning text-warning-content px-6 py-3 text-sm rounded-box">
+						Welcome to <strong>Yapper</strong> — feel free to browse all posts!
+						But if you wanna <strong>yap</strong> yourself, you'll need to{" "}
+						<a
+							href="/login"
+							className="underline hover:text-warning-content/80 font-semibold"
+						>
+							sign in
+						</a>
+						.
+					</div>
+				)}
+				{!loading ? (
+					<PostsList fetchAllPosts={fetchAllPosts} posts={posts} />
+				) : (
+					Array(4)
+						.fill(1)
+						.map((el, i) => <PostSkeleton key={i} />)
+				)}
+
+				{currentUser?.uid && <AddButton />}
+				<PostModal fetchAllPosts={fetchAllPosts} />
+			</div>
 		</>
 	);
 }
