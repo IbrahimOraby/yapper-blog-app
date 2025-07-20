@@ -3,10 +3,12 @@ import { create } from "zustand";
 import { auth } from "../../firebaseConfig";
 
 const useAuthStore = create((set) => ({
-	curreUser: {
-		uid: '',
-		userName: ''
+	currentUser: {
+		uid: "",
+		userName: ""
 	},
+	loading: true,
+
 	setCurrentUser: (user) => set({ currentUser: user }),
 	initAuthListener: () => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -15,14 +17,16 @@ const useAuthStore = create((set) => ({
 					currentUser: {
 						uid: user.uid,
 						userName: user.displayName
-					}
+					},
+					loading: false
 				}); // store only uid
 			} else {
 				set({
 					currentUser: {
-						uid: '',
-						userName: ''
-					}
+						uid: "",
+						userName: ""
+					},
+					loading: false
 				});
 			}
 		});

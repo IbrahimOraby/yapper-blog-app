@@ -1,9 +1,10 @@
 import React from "react";
 
 function AddButton() {
+
 	return (
 		<button
-			className="btn btn-primary rounded-full fixed bottom-18 right-8 py-6 px-3 hover:scale-108"
+			className="btn btn-primary btn-circle btn-xl fixed bottom-18 right-8 hover:scale-112 shadow-lg hover:shadow-xl transition-transform duration-200 "
 			type="button"
 			onClick={() => document.getElementById("post_modal").showModal()}
 		>

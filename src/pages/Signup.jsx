@@ -5,6 +5,7 @@ import MyTextInput from "../components/TextInput";
 import FormHeader from "../components/FormHeader";
 import { useNavigate } from "react-router";
 import { createUser } from "../services/firestore-service";
+import useAuthStore from "../store/useAuthStore";
 
 function Signup() {
 	const navigate = useNavigate();
@@ -36,6 +37,8 @@ function Signup() {
 			onSubmit={async (values, actions) => {
 				console.log("values: ", values);
 				console.log("actions: ", actions);
+				// const userName = `${values.firstName} ${values.lastName}`;
+				// console.log(userName);
 
 				try {
 					const userName = `${values.firstName} ${values.lastName}`;
@@ -50,20 +53,25 @@ function Signup() {
 					//create user in firestore
 					await createUser({
 						uid,
-						email: values.email,
-						displayName: userName 
+						userName
+					});
+
+					useAuthStore.getState().setCurrentUser({
+						uid,
+						userName
 					});
 
 					//navigate to Home Page
 					navigate("/", { replace: true });
 				} catch (err) {
 					console.error(err);
+					actions.setStatus("Something went wrong.");
 				} finally {
 					actions.setSubmitting(false);
 				}
 			}}
 		>
-			{({ isSubmitting }) => (
+			{({ isSubmitting, status }) => (
 				<Form className="bg-base-200 border-base-300 rounded-box w-md border p-8 space-y-4">
 					<FormHeader>Sign Up</FormHeader>
 
@@ -107,9 +115,17 @@ function Signup() {
 					</div>
 
 					<div className="h-1"></div>
-					<button className="btn btn-neutral mt-4 w-full" type="submit">
+					<button
+						className={`btn btn-neutral w-full ${
+							isSubmitting && "btn-disabled"
+						}`}
+						type="submit"
+					>
 						{isSubmitting ? "Signing Up..." : "Sign Up"}
 					</button>
+					<div className="text-xs text-error min-h-0.5 ">
+						{status ? status : "\u00A0"}
+					</div>
 				</Form>
 			)}
 		</Formik>

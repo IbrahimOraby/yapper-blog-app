@@ -8,18 +8,19 @@ import {
 	orderBy,
 	query,
 	serverTimestamp,
-	setDoc
+	setDoc,
+	updateDoc
 } from "firebase/firestore";
 import { app } from "../../firebaseConfig";
 
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-export const createUser = async (userData) => {
+export const createUser = async ({ uid, userName }) => {
 	try {
-		await setDoc(doc(db, "users", userData.uid), {
-			uid: userData.uid,
-			userName: userData.displayName,
+		await setDoc(doc(db, "users", uid), {
+			uid,
+			userName,
 			createdAt: serverTimestamp()
 		});
 		console.log("User created successfully");
@@ -29,10 +30,11 @@ export const createUser = async (userData) => {
 };
 
 export const createPost = async (userData, postData) => {
+	console.log(userData);
 	try {
 		await addDoc(collection(db, "posts"), {
 			uid: userData.uid,
-			userName: userData.displayName,
+			userName: userData.userName,
 			createdAt: serverTimestamp(),
 			postTitle: postData.postTitle,
 			postFile: postData.postFile,
@@ -69,5 +71,14 @@ export const deletePost = async (pid) => {
 		console.log(`Post with ${pid} is deleted `);
 	} catch (error) {
 		console.error("Error deleting the post: ", error);
+	}
+};
+
+export const updatePost = async (pid, updatedData) => {
+	try {
+		await updateDoc(doc(db, "posts", pid), updatedData);
+		console.log(`Post with ${pid} got updated`);
+	} catch (error) {
+		console.error("Error updating the post: ", error);
 	}
 };
