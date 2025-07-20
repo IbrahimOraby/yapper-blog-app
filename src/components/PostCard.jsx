@@ -25,7 +25,7 @@ function PostCard({ post }) {
 	return (
 		<div
 			key={post.id}
-			className="bg-base-100 border border-base-300 shadow-base-300 rounded-xl px-5 py-4 shadow-sm min-w-xl "
+			className="bg-base-100 border border-base-300 shadow-base-300 rounded-xl px-5 py-4 shadow-sm lg:min-w-xl "
 		>
 			<div className=" pb-4">
 				<div className="flex items-center justify-between mb-2">

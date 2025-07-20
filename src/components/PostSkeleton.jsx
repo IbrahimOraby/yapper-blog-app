@@ -2,7 +2,7 @@ import React from "react";
 
 function PostSkeleton() {
 	return (
-		<div className="bg-base-100 border border-base-300 rounded-xl px-5 py-4 animate-pulse space-y-4 min-w-xl">
+		<div className="bg-base-100 border border-base-300 rounded-xl px-5 py-4 animate-pulse space-y-4 md:min-w-xl w-sm">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2">
 					<div className="skeleton w-6 h-6 rounded-full" />
